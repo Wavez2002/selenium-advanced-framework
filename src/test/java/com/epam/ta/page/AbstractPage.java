@@ -1,6 +1,8 @@
 package com.epam.ta.page;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,4 +20,13 @@ public abstract class AbstractPage {
   }
 
   protected abstract AbstractPage openPage();
+
+  protected void highlightElement(WebElement element) {
+    try {
+      JavascriptExecutor js = (JavascriptExecutor) driver;
+      js.executeScript("arguments[0].style.border='3px solid red'", element);
+    } catch (Exception e) {
+      // Ignore if element is not interactable via JS
+    }
+  }
 }
